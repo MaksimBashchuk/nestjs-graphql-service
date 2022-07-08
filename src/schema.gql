@@ -1,0 +1,25 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  firstName: String
+  secondName: String
+  middleName: String
+  password: String!
+  email: String!
+}
+
+type JWT {
+  jwt: String!
+}
+
+type Query {
+  user(id: ID!): User!
+  jwt(email: String!, password: String!): JWT!
+}
+
+type Mutation {
+  register(email: String!, password: String!, firstName: String!, lastName: String!): User!
+}
