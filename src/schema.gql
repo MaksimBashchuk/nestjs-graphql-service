@@ -28,11 +28,28 @@ type Genre {
   year: Int
 }
 
+type Artist {
+  id: ID!
+  firstName: String
+  secondName: String
+  middleName: String
+  birthDate: Date
+  birthPlace: String
+  country: String
+  bands: [String]!
+  instruments: [String]!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
 type Query {
   user(id: ID!): User!
   jwt(email: String!, password: String!): JWT!
   genre(id: ID!): Genre!
   genres: [Genre]!
+  artist(id: ID!): Artist!
+  artists: [Artist]!
 }
 
 type Mutation {
@@ -40,4 +57,7 @@ type Mutation {
   createGenre(name: String!, description: String, country: String, year: Int): Genre!
   deleteGenre(id: ID!): DeletedItem
   updateGenre(id: ID!, name: String, description: String, country: String, year: Int): Genre!
+  createArtist(firstName: String!, secondName: String!, middleName: String, birthDate: Date, birthPlace: String, country: String!, bands: [String], instruments: [String]): Artist!
+  deleteArtist(id: ID!): DeletedItem
+  updateArtist(id: ID!, firstName: String, secondName: String, middleName: String, birthDate: Date, birthPlace: String, country: String, bands: [String], instruments: [String]): Artist!
 }

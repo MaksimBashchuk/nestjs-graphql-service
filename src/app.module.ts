@@ -12,6 +12,7 @@ import { TransformResponseDataInterceptor } from './utils/transformResponseData.
 
 import { UsersModule } from './users/users.module';
 import { GenresModule } from './genres/genres.module';
+import { ArtistsModule } from './artists/artists.module';
 
 @Module({
   providers: [
@@ -34,6 +35,7 @@ import { GenresModule } from './genres/genres.module';
     HttpModule,
     UsersModule,
     GenresModule,
+    ArtistsModule,
   ],
 })
 export class AppModule {}

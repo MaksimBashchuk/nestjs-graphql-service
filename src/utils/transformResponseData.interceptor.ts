@@ -12,7 +12,7 @@ export interface Response<T> {
 }
 
 const modifyObject = data => {
-  console.log(data);
+  console.log('DATA:\n', data);
   const id = data?._id;
   const secondName = data?.lastName;
 
