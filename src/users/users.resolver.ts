@@ -1,9 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UsersService } from './users.service';
+
 import { JWT, User } from './user.entity';
+import { UsersService } from './users.service';
 import { GetAuthTokenArgs } from './dto/getAuthToken.args';
 import { RegisterUserArgs } from './dto/registerUser.args';
 import { GetUserArgs } from './dto/getUser.args';
+
 import { AUTH } from './constants';
 
 @Resolver(() => User)

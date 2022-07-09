@@ -11,6 +11,24 @@ export interface Response<T> {
   data: T;
 }
 
+const modifyObject = data => {
+  console.log(data);
+  const id = data?._id;
+  const secondName = data?.lastName;
+
+  if (id) {
+    id && delete data._id;
+    data['id'] = id;
+  }
+
+  if (secondName) {
+    delete data.lastName;
+    data['secondName'] = secondName;
+  }
+
+  return data;
+};
+
 @Injectable()
 export class TransformResponseDataInterceptor<T>
   implements NestInterceptor<T, Response<T>>
@@ -21,11 +39,9 @@ export class TransformResponseDataInterceptor<T>
   ): Observable<Response<T>> {
     return next.handle().pipe(
       map(data => {
-        const id = data?._id;
-        const secondName = data?.lastName;
-        secondName && delete data.lastName;
-        id && delete data._id;
-        return { id, secondName, ...data };
+        return Array.isArray(data)
+          ? data.map(item => modifyObject(item))
+          : modifyObject(data);
       }),
     );
   }

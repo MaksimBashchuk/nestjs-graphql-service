@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom, map, Observable } from 'rxjs';
+
 import { JWT, User } from './user.entity';
 import { GET_TOKEN_URL, REGISTER_URL, BASE_USER_URL } from './constants';
 
@@ -10,7 +11,7 @@ export class UsersService {
 
   getUser = async (id: string): Promise<User> => {
     const observable: Observable<User> = this.httpService
-      .get<User>(`${BASE_USER_URL}/${id}`, {})
+      .get<User>(`${BASE_USER_URL}/${id}`)
       .pipe(map(res => res.data));
 
     return await lastValueFrom(observable);

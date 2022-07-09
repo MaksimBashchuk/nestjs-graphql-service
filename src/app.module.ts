@@ -1,13 +1,17 @@
+import { join } from 'path';
+
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
-import { UsersModule } from './users/users.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { TransformResponseDataInterceptor } from './utils/transformResponseData.interceptor';
-import { setAuthHeaderInterceptor } from './utils/setAuthHeaderInterceptor';
-import { HttpModule } from '@nestjs/axios';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { HttpModule } from '@nestjs/axios';
+
+import { setAuthHeaderInterceptor } from './utils/setAuthHeaderInterceptor';
+import { TransformResponseDataInterceptor } from './utils/transformResponseData.interceptor';
+
+import { UsersModule } from './users/users.module';
+import { GenresModule } from './genres/genres.module';
 
 @Module({
   providers: [
@@ -29,6 +33,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
     }),
     HttpModule,
     UsersModule,
+    GenresModule,
   ],
 })
 export class AppModule {}

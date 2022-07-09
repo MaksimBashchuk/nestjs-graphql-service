@@ -15,11 +15,29 @@ type JWT {
   jwt: String!
 }
 
+type DeletedItem {
+  acknowledged: Boolean
+  deletedCount: Int
+}
+
+type Genre {
+  id: ID!
+  name: String
+  description: String
+  country: String
+  year: Int
+}
+
 type Query {
   user(id: ID!): User!
   jwt(email: String!, password: String!): JWT!
+  genre(id: ID!): Genre!
+  genres: [Genre]!
 }
 
 type Mutation {
   register(email: String!, password: String!, firstName: String!, lastName: String!): User!
+  createGenre(name: String!, description: String, country: String, year: Int): Genre!
+  deleteGenre(id: ID!): DeletedItem
+  updateGenre(id: ID!, name: String, description: String, country: String, year: Int): Genre!
 }
