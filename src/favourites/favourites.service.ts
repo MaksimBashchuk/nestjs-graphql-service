@@ -32,4 +32,15 @@ export class FavouritesService {
 
     return await lastValueFrom(observable);
   };
+
+  removeFavouritesByType = async (
+    type: FAVOURITES,
+    id: string,
+  ): Promise<Favourites> => {
+    const observable: Observable<Favourites> = this.httpService
+      .put<Favourites>(ADD_TO_FAVOURITES, { type, id })
+      .pipe(map(res => res.data));
+
+    return await lastValueFrom(observable);
+  };
 }

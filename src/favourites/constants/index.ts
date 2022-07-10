@@ -4,8 +4,8 @@ export const BASE_FAVOURITES_URL =
 export const ADD_TO_FAVOURITES = `${BASE_FAVOURITES_URL}/add`;
 
 export const enum FAVOURITES {
-  BAND = 'band',
-  GENRE = 'genre',
-  ARTIST = 'artist',
-  TRACK = 'track',
+  BANDS = 'bands',
+  GENRES = 'genres',
+  ARTISTS = 'artists',
+  TRACKS = 'tracks',
 }

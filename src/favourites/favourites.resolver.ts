@@ -1,7 +1,13 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Parent, ResolveField, Resolver, Query } from '@nestjs/graphql';
+import {
+  Args,
+  Parent,
+  ResolveField,
+  Resolver,
+  Query,
+  Mutation,
+} from '@nestjs/graphql';
 
-import { DeletedItem } from '../common/deletedItem.entity';
 import { Favourites } from './favourite.entity';
 import { Artist } from '../artists/artist.entity';
 import { Band } from '../bands/band.entity';
@@ -15,6 +21,8 @@ import { TracksService } from '../tracks/tracks.service';
 import { GenresService } from '../genres/genres.service';
 
 import { AuthGuard } from '../users/auth.guard';
+
+import { FAVOURITES } from './constants';
 
 @Resolver(() => Favourites)
 export class FavouritesResolver {
@@ -64,5 +72,56 @@ export class FavouritesResolver {
   @UseGuards(AuthGuard)
   async favourites(): Promise<Favourites> {
     return await this.favouritesService.getAllFavourites();
+  }
+
+  @Mutation(() => Favourites)
+  @UseGuards(AuthGuard)
+  addTrackToFavourites(@Args('id') id: string): Promise<Favourites> {
+    return this.favouritesService.addFavouritesByType(FAVOURITES.TRACKS, id);
+  }
+
+  @Mutation(() => Favourites)
+  @UseGuards(AuthGuard)
+  addBandToFavourites(@Args('id') id: string): Promise<Favourites> {
+    return this.favouritesService.addFavouritesByType(FAVOURITES.BANDS, id);
+  }
+
+  @Mutation(() => Favourites)
+  @UseGuards(AuthGuard)
+  addArtistToFavourites(@Args('id') id: string): Promise<Favourites> {
+    return this.favouritesService.addFavouritesByType(FAVOURITES.ARTISTS, id);
+  }
+
+  @Mutation(() => Favourites)
+  @UseGuards(AuthGuard)
+  addGenreToFavourites(@Args('id') id: string): Promise<Favourites> {
+    return this.favouritesService.addFavouritesByType(FAVOURITES.GENRES, id);
+  }
+
+  @Mutation(() => Favourites)
+  @UseGuards(AuthGuard)
+  removeTrackFromFavourites(@Args('id') id: string): Promise<Favourites> {
+    return this.favouritesService.removeFavouritesByType(FAVOURITES.TRACKS, id);
+  }
+
+  @Mutation(() => Favourites)
+  @UseGuards(AuthGuard)
+  removeBandFromFavourites(@Args('id') id: string): Promise<Favourites> {
+    return this.favouritesService.removeFavouritesByType(FAVOURITES.BANDS, id);
+  }
+
+  @Mutation(() => Favourites)
+  @UseGuards(AuthGuard)
+  removeArtistFromFavourites(@Args('id') id: string): Promise<Favourites> {
+    return this.favouritesService.removeFavouritesByType(
+      FAVOURITES.ARTISTS,
+      id,
+    );
+  }
+
+  @Mutation(() => Favourites)
+  @UseGuards(AuthGuard)
+  removeGenreFromFavourites(@Args('id') id: string): Promise<Favourites> {
+    return this.favouritesService.removeFavouritesByType(FAVOURITES.GENRES, id);
   }
 }
