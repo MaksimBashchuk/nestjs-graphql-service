@@ -79,7 +79,7 @@ export class TracksResolver {
     return this.tracksService.createTrack(body);
   }
 
-  @Mutation(() => DeletedItem)
+  @Mutation(() => DeletedItem, { nullable: true })
   @UseGuards(AuthGuard)
   deleteTrack(@Args() { id }: GetTrackArgs): Promise<DeletedItem> {
     return this.tracksService.deleteTrack(id);
