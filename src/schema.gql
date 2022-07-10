@@ -74,6 +74,15 @@ type Album {
   image: String
 }
 
+type Favourites {
+  id: ID!
+  userId: ID
+  bands: [Band]
+  genres: [Genre]
+  artists: [Artist]
+  tracks: [Track]
+}
+
 type Query {
   user(id: ID!): User
   jwt(email: String!, password: String!): JWT!
@@ -87,6 +96,7 @@ type Query {
   tracks: [Track!]!
   album(id: ID!): Album
   albums: [Album]!
+  favourites: Favourites
 }
 
 type Mutation {

@@ -15,6 +15,7 @@ import { ArtistsModule } from './artists/artists.module';
 import { BandsModule } from './bands/bands.module';
 import { TracksModule } from './tracks/tracks.module';
 import { AlbumsModule } from './albums/albums.module';
+import { FavouritesModule } from './favourites/favourites.module';
 
 @Module({
   providers: [
@@ -37,6 +38,7 @@ import { AlbumsModule } from './albums/albums.module';
     BandsModule,
     TracksModule,
     AlbumsModule,
+    FavouritesModule,
   ],
 })
 export class AppModule {}
