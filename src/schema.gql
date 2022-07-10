@@ -49,7 +49,9 @@ type Artist {
   instruments: [String]
 }
 
-"""Date custom scalar type"""
+"""
+Date custom scalar type
+"""
 scalar Date
 
 type Track {
@@ -76,16 +78,82 @@ type Query {
 }
 
 type Mutation {
-  register(email: String!, password: String!, firstName: String!, lastName: String!): User!
-  createGenre(name: String!, description: String, country: String, year: Int): Genre!
+  register(
+    email: String!
+    password: String!
+    firstName: String!
+    lastName: String!
+  ): User!
+  createGenre(
+    name: String!
+    description: String
+    country: String
+    year: Int
+  ): Genre!
   deleteGenre(id: ID!): DeletedItem
-  updateGenre(id: ID!, name: String, description: String, country: String, year: Int): Genre!
-  createArtist(firstName: String!, secondName: String!, middleName: String, birthDate: Date, birthPlace: String, country: String!, bands: [String], instruments: [String]): Artist!
+  updateGenre(
+    id: ID!
+    name: String
+    description: String
+    country: String
+    year: Int
+  ): Genre!
+  createArtist(
+    firstName: String!
+    secondName: String!
+    middleName: String
+    birthDate: Date
+    birthPlace: String
+    country: String!
+    bands: [String]
+    instruments: [String]
+  ): Artist!
   deleteArtist(id: ID!): DeletedItem
-  updateArtist(id: ID!, firstName: String, secondName: String, middleName: String, birthDate: Date, birthPlace: String, country: String, bands: [String], instruments: [String]): Artist!
-  createBand(name: String!, origin: String, members: [String], website: String, genresIds: [ID]): Band!
+  updateArtist(
+    id: ID!
+    firstName: String
+    secondName: String
+    middleName: String
+    birthDate: Date
+    birthPlace: String
+    country: String
+    bands: [String]
+    instruments: [String]
+  ): Artist!
+  createBand(
+    name: String!
+    origin: String
+    members: [String]
+    website: String
+    genresIds: [ID]
+  ): Band!
   deleteBand(id: ID!): DeletedItem
-  updateBand(id: ID!, name: String, origin: String, members: [String], website: String, genresIds: [ID]): Band!
-  createTrack(title: String!, albumId: String, bandsIds: [String!], artistsIds: [String!], duration: Int, released: Int, genresIds: [String!]): Track!
+  updateBand(
+    id: ID!
+    name: String
+    origin: String
+    members: [String]
+    website: String
+    genresIds: [ID]
+  ): Band!
+  createTrack(
+    title: String!
+    albumId: String
+    bandsIds: [String!]
+    artistsIds: [String!]
+    duration: Int
+    released: Int
+    genresIds: [String!]
+  ): Track!
   deleteTrack(id: ID!): DeletedItem!
+  updateTrack(
+    id: ID!
+    title: String
+    albumId: String
+    bandsIds: [String!]
+    artistsIds: [String!]
+    duration: Int
+    released: Int
+    genresIds: [String!]
+  ): Track!
 }

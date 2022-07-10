@@ -22,6 +22,7 @@ import { GenresService } from '../genres/genres.service';
 // import { AlbumsService } from '../albums/albums.service';
 import { GetTrackArgs } from './dto/getTrack.args';
 import { CreateTrackArgs } from './dto/createTrack.args';
+import { UpdateTrackArgs } from './dto/updateTrack.args';
 
 import { AuthGuard } from '../users/auth.guard';
 
@@ -82,5 +83,11 @@ export class TracksResolver {
   @UseGuards(AuthGuard)
   deleteTrack(@Args() { id }: GetTrackArgs): Promise<DeletedItem> {
     return this.tracksService.deleteTrack(id);
+  }
+
+  @Mutation(() => Track)
+  @UseGuards(AuthGuard)
+  updateTrack(@Args() args: UpdateTrackArgs): Promise<Track> {
+    return this.tracksService.updateTrack(args);
   }
 }

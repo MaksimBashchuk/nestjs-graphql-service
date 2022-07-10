@@ -5,6 +5,7 @@ import { lastValueFrom, map, Observable } from 'rxjs';
 import { DeletedItem } from 'src/common/deletedItem.entity';
 import { Track } from './track.entity';
 import { CreateTrackArgs } from './dto/createTrack.args';
+import { UpdateTrackArgs } from './dto/updateTrack.args';
 
 import { BASE_TRACKS_URL } from './constants';
 
@@ -39,6 +40,14 @@ export class TracksService {
   deleteTrack = async (id: string): Promise<DeletedItem> => {
     const observable: Observable<DeletedItem> = this.httpService
       .delete<DeletedItem>(`${BASE_TRACKS_URL}/${id}`)
+      .pipe(map(res => res.data));
+
+    return await lastValueFrom(observable);
+  };
+
+  updateTrack = async ({ id, ...body }: UpdateTrackArgs): Promise<Track> => {
+    const observable: Observable<Track> = this.httpService
+      .put<Track>(`${BASE_TRACKS_URL}/${id}`, body)
       .pipe(map(res => res.data));
 
     return await lastValueFrom(observable);
