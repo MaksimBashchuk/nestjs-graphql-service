@@ -14,7 +14,7 @@ export class UpdateArtistArgs {
   @Field({ nullable: true })
   middleName?: string;
 
-  @Field(() => Date, { nullable: true })
+  @Field({ nullable: true })
   birthDate?: string;
 
   @Field({ nullable: true })

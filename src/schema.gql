@@ -42,15 +42,12 @@ type Artist {
   firstName: String
   secondName: String
   middleName: String
-  birthDate: Date
+  birthDate: String
   birthPlace: String
   country: String
   bands: [Band]
   instruments: [String]
 }
-
-"""Date custom scalar type"""
-scalar Date
 
 type Track {
   id: ID!
@@ -104,9 +101,9 @@ type Mutation {
   createGenre(name: String!, description: String, country: String, year: Int): Genre!
   deleteGenre(id: ID!): DeletedItem
   updateGenre(id: ID!, name: String, description: String, country: String, year: Int): Genre!
-  createArtist(firstName: String!, secondName: String!, middleName: String, birthDate: Date, birthPlace: String, country: String!, bands: [String], instruments: [String]): Artist!
+  createArtist(firstName: String!, secondName: String!, middleName: String, birthDate: String, birthPlace: String, country: String!, bands: [String], instruments: [String]): Artist!
   deleteArtist(id: ID!): DeletedItem
-  updateArtist(id: ID!, firstName: String, secondName: String, middleName: String, birthDate: Date, birthPlace: String, country: String, bands: [String], instruments: [String]): Artist!
+  updateArtist(id: ID!, firstName: String, secondName: String, middleName: String, birthDate: String, birthPlace: String, country: String, bands: [String], instruments: [String]): Artist!
   createBand(name: String!, origin: String, members: [String], website: String, genresIds: [ID]): Band!
   deleteBand(id: ID!): DeletedItem
   updateBand(id: ID!, name: String, origin: String, members: [String], website: String, genresIds: [ID]): Band!
