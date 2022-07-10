@@ -62,6 +62,17 @@ type Track {
   genres: [Genre]
 }
 
+type Album {
+  id: ID!
+  name: String
+  released: Int
+  artists: [Artist]
+  bands: [Band]
+  tracks: [Track]
+  genres: [Genre]
+  image: String
+}
+
 type Query {
   user(id: ID!): User
   jwt(email: String!, password: String!): JWT!
@@ -73,6 +84,7 @@ type Query {
   bands: [Band]!
   track(id: ID!): Track
   tracks: [Track!]!
+  albums: [Album!]!
 }
 
 type Mutation {

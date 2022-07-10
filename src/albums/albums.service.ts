@@ -10,4 +10,14 @@ import { Album } from './album.entity';
 import { BASE_ALBUMS_URL } from './constatns';
 
 @Injectable()
-export class AlbumsService {}
+export class AlbumsService {
+  constructor(private readonly httpService: HttpService) {}
+
+  getAllAlbums = async (): Promise<Album[]> => {
+    const observable: Observable<Album[]> = this.httpService
+      .get<{ items: Album[] }>(BASE_ALBUMS_URL)
+      .pipe(map(res => res.data.items));
+
+    return await lastValueFrom(observable);
+  };
+}

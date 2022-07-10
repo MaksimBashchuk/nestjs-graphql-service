@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
+import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 
 import { DeletedItem } from '../common/deletedItem.entity';
 import { Album } from './album.entity';
@@ -62,5 +62,10 @@ export class AlbumsResolver {
     return await Promise.all(
       genresIds.map(id => this.genresService.getGenre(id)),
     );
+  }
+
+  @Query(() => [Album])
+  albums(): Promise<Album[]> {
+    return this.albumsService.getAllAlbums();
   }
 }
