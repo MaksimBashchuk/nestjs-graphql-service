@@ -38,34 +38,36 @@ export class FavouritesResolver {
   async artists(@Parent() favourites: Favourites): Promise<Artist[]> {
     const { artistsIds } = favourites;
 
-    return await Promise.all(
-      artistsIds.map(id => this.artistsService.getArtist(id)),
-    );
+    return (
+      await Promise.all(artistsIds.map(id => this.artistsService.getArtist(id)))
+    ).filter(item => !!item);
   }
 
   @ResolveField(() => [Band], { nullable: 'itemsAndList' })
   async bands(@Parent() favourites: Favourites): Promise<Band[]> {
     const { bandsIds } = favourites;
 
-    return await Promise.all(bandsIds.map(id => this.bandsService.getBand(id)));
+    return (
+      await Promise.all(bandsIds.map(id => this.bandsService.getBand(id)))
+    ).filter(item => !!item);
   }
 
   @ResolveField(() => [Track], { nullable: 'itemsAndList' })
   async tracks(@Parent() favourites: Favourites): Promise<Track[]> {
     const { tracksIds } = favourites;
 
-    return await Promise.all(
-      tracksIds.map(id => this.tracksService.getTrack(id)),
-    );
+    return (
+      await Promise.all(tracksIds.map(id => this.tracksService.getTrack(id)))
+    ).filter(item => !!item);
   }
 
   @ResolveField(() => [Genre], { nullable: 'itemsAndList' })
   async genres(@Parent() favourites: Favourites): Promise<Genre[]> {
     const { genresIds } = favourites;
 
-    return await Promise.all(
-      genresIds.map(id => this.genresService.getGenre(id)),
-    );
+    return (
+      await Promise.all(genresIds.map(id => this.genresService.getGenre(id)))
+    ).filter(item => !!item);
   }
 
   @Query(() => Favourites, { nullable: true })

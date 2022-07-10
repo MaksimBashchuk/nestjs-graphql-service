@@ -7,6 +7,7 @@ import { Favourites } from './favourite.entity';
 import {
   ADD_TO_FAVOURITES,
   BASE_FAVOURITES_URL,
+  REMOVE_FROM_FAVOURITES,
   FAVOURITES,
 } from './constants';
 
@@ -38,7 +39,7 @@ export class FavouritesService {
     id: string,
   ): Promise<Favourites> => {
     const observable: Observable<Favourites> = this.httpService
-      .put<Favourites>(ADD_TO_FAVOURITES, { type, id })
+      .put<Favourites>(REMOVE_FROM_FAVOURITES, { type, id })
       .pipe(map(res => res.data));
 
     return await lastValueFrom(observable);
