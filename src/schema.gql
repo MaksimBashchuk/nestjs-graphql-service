@@ -99,7 +99,8 @@ type Mutation {
   createBand(name: String!, origin: String, members: [String], website: String, genresIds: [ID]): Band!
   deleteBand(id: ID!): DeletedItem
   updateBand(id: ID!, name: String, origin: String, members: [String], website: String, genresIds: [ID]): Band!
-  createTrack(title: String!, albumId: String, bandsIds: [String!], artistsIds: [String!], duration: Int, released: Int, genresIds: [String!]): Track!
+  createTrack(title: String!, albumId: String, bandsIds: [String], artistsIds: [String], duration: Int, released: Int, genresIds: [String]): Track!
   deleteTrack(id: ID!): DeletedItem
   updateTrack(id: ID!, title: String, albumId: String, bandsIds: [String!], artistsIds: [String!], duration: Int, released: Int, genresIds: [String!]): Track!
+  createAlbum(name: String!, released: String, artistsIds: [String], bandsIds: [String], trackIds: [String], genresIds: [String]): Album!
 }

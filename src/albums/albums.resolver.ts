@@ -1,5 +1,12 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 
 import { DeletedItem } from '../common/deletedItem.entity';
 import { Album } from './album.entity';
@@ -15,7 +22,7 @@ import { TracksService } from '../tracks/tracks.service';
 import { GenresService } from '../genres/genres.service';
 
 import { GetAlbumArgs } from './dto/getAlbum.args';
-// import { CreateAlbumArgs } from './dto/createAlbum.args';
+import { CreateAlbumArgs } from './dto/createAlbum.args';
 // import { UpdateAlbumArgs } from './dto/updateAlbum.args';
 
 import { AuthGuard } from '../users/auth.guard';
@@ -72,5 +79,11 @@ export class AlbumsResolver {
   @Query(() => [Album], { nullable: 'items' })
   albums(): Promise<Album[]> {
     return this.albumsService.getAllAlbums();
+  }
+
+  @Mutation(() => Album)
+  @UseGuards(AuthGuard)
+  createAlbum(@Args() body: CreateAlbumArgs) {
+    return this.albumsService.createAlbum(body);
   }
 }
