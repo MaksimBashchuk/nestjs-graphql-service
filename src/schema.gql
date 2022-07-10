@@ -84,7 +84,8 @@ type Query {
   bands: [Band]!
   track(id: ID!): Track
   tracks: [Track!]!
-  albums: [Album!]!
+  album(id: ID!): Album
+  albums: [Album]!
 }
 
 type Mutation {

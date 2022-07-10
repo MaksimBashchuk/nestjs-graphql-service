@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 
 import { DeletedItem } from '../common/deletedItem.entity';
 import { Album } from './album.entity';
@@ -14,7 +14,7 @@ import { BandsService } from '../bands/bands.service';
 import { TracksService } from '../tracks/tracks.service';
 import { GenresService } from '../genres/genres.service';
 
-// import { GetAlbumArgs } from './dto/getAlbum.args';
+import { GetAlbumArgs } from './dto/getAlbum.args';
 // import { CreateAlbumArgs } from './dto/createAlbum.args';
 // import { UpdateAlbumArgs } from './dto/updateAlbum.args';
 
@@ -64,7 +64,12 @@ export class AlbumsResolver {
     );
   }
 
-  @Query(() => [Album])
+  @Query(() => Album, { nullable: true })
+  album(@Args() { id }: GetAlbumArgs): Promise<Album> {
+    return this.albumsService.getAlbum(id);
+  }
+
+  @Query(() => [Album], { nullable: 'items' })
   albums(): Promise<Album[]> {
     return this.albumsService.getAllAlbums();
   }

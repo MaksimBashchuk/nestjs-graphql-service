@@ -13,6 +13,14 @@ import { BASE_ALBUMS_URL } from './constatns';
 export class AlbumsService {
   constructor(private readonly httpService: HttpService) {}
 
+  getAlbum = async (id: string): Promise<Album> => {
+    const observable: Observable<Album> = this.httpService
+      .get<Album>(`${BASE_ALBUMS_URL}/${id}`)
+      .pipe(map(res => res.data));
+
+    return await lastValueFrom(observable);
+  };
+
   getAllAlbums = async (): Promise<Album[]> => {
     const observable: Observable<Album[]> = this.httpService
       .get<{ items: Album[] }>(BASE_ALBUMS_URL)
