@@ -14,11 +14,15 @@ export class TracksService {
   constructor(private readonly httpService: HttpService) {}
 
   getTrack = async (id: string): Promise<Track> => {
-    const observable: Observable<Track> = this.httpService
-      .get<Track>(`${BASE_TRACKS_URL}/${id}`)
-      .pipe(map(res => res.data));
+    try {
+      const observable: Observable<Track> = this.httpService
+        .get<Track>(`${BASE_TRACKS_URL}/${id}`)
+        .pipe(map(res => res.data));
 
-    return await lastValueFrom(observable);
+      return await lastValueFrom(observable);
+    } catch {
+      return null;
+    }
   };
 
   getAllTracks = async (): Promise<Track[]> => {

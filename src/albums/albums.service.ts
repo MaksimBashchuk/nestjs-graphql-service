@@ -14,11 +14,15 @@ export class AlbumsService {
   constructor(private readonly httpService: HttpService) {}
 
   getAlbum = async (id: string): Promise<Album> => {
-    const observable: Observable<Album> = this.httpService
-      .get<Album>(`${BASE_ALBUMS_URL}/${id}`)
-      .pipe(map(res => res.data));
+    try {
+      const observable: Observable<Album> = this.httpService
+        .get<Album>(`${BASE_ALBUMS_URL}/${id}`)
+        .pipe(map(res => res.data));
 
-    return await lastValueFrom(observable);
+      return await lastValueFrom(observable);
+    } catch {
+      return null;
+    }
   };
 
   getAllAlbums = async (): Promise<Album[]> => {

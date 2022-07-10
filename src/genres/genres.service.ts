@@ -14,11 +14,15 @@ export class GenresService {
   constructor(private readonly httpService: HttpService) {}
 
   getGenre = async (id: string): Promise<Genre> => {
-    const observable: Observable<Genre> = this.httpService
-      .get<Genre>(`${BASE_GENRE_URL}/${id}`)
-      .pipe(map(res => res.data));
+    try {
+      const observable: Observable<Genre> = this.httpService
+        .get<Genre>(`${BASE_GENRE_URL}/${id}`)
+        .pipe(map(res => res.data));
 
-    return await lastValueFrom(observable);
+      return await lastValueFrom(observable);
+    } catch {
+      return null;
+    }
   };
 
   getAllGenres = async (): Promise<Genre[]> => {

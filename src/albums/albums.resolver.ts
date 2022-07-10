@@ -72,8 +72,8 @@ export class AlbumsResolver {
   }
 
   @Query(() => Album, { nullable: true })
-  album(@Args() { id }: GetAlbumArgs): Promise<Album> {
-    return this.albumsService.getAlbum(id);
+  async album(@Args() { id }: GetAlbumArgs): Promise<Album> {
+    return await this.albumsService.getAlbum(id);
   }
 
   @Query(() => [Album], { nullable: 'items' })

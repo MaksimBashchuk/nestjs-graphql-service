@@ -8,14 +8,14 @@ export class Track {
   @Field()
   title: string;
 
-  // @Field(() => [ID], { nullable: 'itemsAndList', name: 'album' })
-  // albumId?: string;
+  @Field(() => ID, { nullable: true, name: 'album' })
+  albumId?: string;
 
   @Field(() => [ID], { nullable: 'itemsAndList', name: 'artists' })
-  artistsIds: string[];
+  artistsIds?: string[];
 
   @Field(() => [ID], { nullable: 'itemsAndList', name: 'bands' })
-  bandsIds: string[];
+  bandsIds?: string[];
 
   @Field(() => Int, { nullable: true })
   duration?: number;
@@ -24,5 +24,5 @@ export class Track {
   released?: number;
 
   @Field(() => [ID], { nullable: 'itemsAndList', name: 'genres' })
-  genresIds: string[];
+  genresIds?: string[];
 }

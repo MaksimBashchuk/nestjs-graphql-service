@@ -14,11 +14,15 @@ export class BandsService {
   constructor(private readonly httpService: HttpService) {}
 
   getBand = async (id: string): Promise<Band> => {
-    const observable: Observable<Band> = this.httpService
-      .get<Band>(`${BASE_BANDS_URL}/${id}`)
-      .pipe(map(res => res.data));
+    try {
+      const observable: Observable<Band> = this.httpService
+        .get<Band>(`${BASE_BANDS_URL}/${id}`)
+        .pipe(map(res => res.data));
 
-    return await lastValueFrom(observable);
+      return await lastValueFrom(observable);
+    } catch {
+      return null;
+    }
   };
 
   getAllBands = async (): Promise<Band[]> => {

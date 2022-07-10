@@ -6,6 +6,7 @@ import { TracksService } from './tracks.service';
 import { ArtistsService } from '../artists/artists.service';
 import { BandsService } from '../bands/bands.service';
 import { GenresService } from '../genres/genres.service';
+import { AlbumsService } from '../albums/albums.service';
 
 @Module({
   imports: [HttpModule],
@@ -15,6 +16,7 @@ import { GenresService } from '../genres/genres.service';
     BandsService,
     ArtistsService,
     GenresService,
+    AlbumsService,
   ],
 })
 export class TracksModule {}

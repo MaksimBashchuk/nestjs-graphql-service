@@ -14,11 +14,15 @@ export class ArtistsService {
   constructor(private readonly httpService: HttpService) {}
 
   getArtist = async (id: string): Promise<Artist> => {
-    const observable: Observable<Artist> = this.httpService
-      .get<Artist>(`${BASE_ARTISTS_URL}/${id}`)
-      .pipe(map(res => res.data));
+    try {
+      const observable: Observable<Artist> = this.httpService
+        .get<Artist>(`${BASE_ARTISTS_URL}/${id}`)
+        .pipe(map(res => res.data));
 
-    return await lastValueFrom(observable);
+      return await lastValueFrom(observable);
+    } catch {
+      return null;
+    }
   };
 
   getAllArtists = async (): Promise<Artist[]> => {

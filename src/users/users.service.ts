@@ -10,11 +10,15 @@ export class UsersService {
   constructor(private readonly httpService: HttpService) {}
 
   getUser = async (id: string): Promise<User> => {
-    const observable: Observable<User> = this.httpService
-      .get<User>(`${BASE_USER_URL}/${id}`)
-      .pipe(map(res => res.data));
+    try {
+      const observable: Observable<User> = this.httpService
+        .get<User>(`${BASE_USER_URL}/${id}`)
+        .pipe(map(res => res.data));
 
-    return await lastValueFrom(observable);
+      return await lastValueFrom(observable);
+    } catch {
+      return null;
+    }
   };
 
   registerUser = async (

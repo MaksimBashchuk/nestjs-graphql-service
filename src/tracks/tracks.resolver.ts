@@ -13,13 +13,13 @@ import { Track } from '../tracks/track.entity';
 import { Artist } from '../artists/artist.entity';
 import { Band } from '../bands/band.entity';
 import { Genre } from '../genres/genre.entity';
-// import { Album } from '../albums/album.entity';
+import { Album } from '../albums/album.entity';
 
 import { TracksService } from './tracks.service';
 import { ArtistsService } from '../artists/artists.service';
 import { BandsService } from '../bands/bands.service';
 import { GenresService } from '../genres/genres.service';
-// import { AlbumsService } from '../albums/albums.service';
+import { AlbumsService } from '../albums/albums.service';
 import { GetTrackArgs } from './dto/getTrack.args';
 import { CreateTrackArgs } from './dto/createTrack.args';
 import { UpdateTrackArgs } from './dto/updateTrack.args';
@@ -32,11 +32,19 @@ export class TracksResolver {
     private tracksService: TracksService,
     private bandsService: BandsService,
     private artistsService: ArtistsService,
-    private genresService: GenresService, // private albumsService: AlbumsService
+    private genresService: GenresService,
+    private albumsService: AlbumsService,
   ) {}
 
   // @ResolveField()
   // async album
+
+  @ResolveField(() => Album, { nullable: true })
+  async album(@Parent() track: Track): Promise<Album> {
+    const { albumId } = track;
+
+    return await this.albumsService.getAlbum(albumId);
+  }
 
   @ResolveField(() => [Artist], { nullable: 'itemsAndList' })
   async artists(@Parent() track: Track): Promise<Artist[]> {
