@@ -5,7 +5,7 @@ import { lastValueFrom, map, Observable } from 'rxjs';
 import { DeletedItem } from 'src/common/deletedItem.entity';
 import { Album } from './album.entity';
 import { CreateAlbumArgs } from './dto/createAlbum.args';
-// import { UpdateAlbumArgs } from './dto/updateAlbum.args';
+import { UpdateAlbumArgs } from './dto/updateAlbum.args';
 
 import { BASE_ALBUMS_URL } from './constants';
 
@@ -40,6 +40,14 @@ export class AlbumsService {
   deleteAlbum = async (id: string): Promise<DeletedItem> => {
     const observable: Observable<DeletedItem> = this.httpService
       .delete<DeletedItem>(`${BASE_ALBUMS_URL}/${id}`)
+      .pipe(map(res => res.data));
+
+    return await lastValueFrom(observable);
+  };
+
+  updateAlbum = async ({ id, ...body }: UpdateAlbumArgs): Promise<Album> => {
+    const observable: Observable<Album> = this.httpService
+      .put<Album>(`${BASE_ALBUMS_URL}/${id}`, body)
       .pipe(map(res => res.data));
 
     return await lastValueFrom(observable);

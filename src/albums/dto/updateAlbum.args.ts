@@ -1,9 +1,12 @@
-import { ArgsType, Field, Int } from '@nestjs/graphql';
+import { ArgsType, Field, ID, Int } from '@nestjs/graphql';
 
 @ArgsType()
-export class CreateAlbumArgs {
-  @Field()
-  name: string;
+export class UpdateAlbumArgs {
+  @Field(() => ID)
+  id: string;
+
+  @Field({ nullable: true })
+  name?: string;
 
   @Field(() => Int, { nullable: true })
   released?: number;

@@ -23,7 +23,7 @@ import { GenresService } from '../genres/genres.service';
 
 import { GetAlbumArgs } from './dto/getAlbum.args';
 import { CreateAlbumArgs } from './dto/createAlbum.args';
-// import { UpdateAlbumArgs } from './dto/updateAlbum.args';
+import { UpdateAlbumArgs } from './dto/updateAlbum.args';
 
 import { AuthGuard } from '../users/auth.guard';
 
@@ -91,5 +91,11 @@ export class AlbumsResolver {
   @UseGuards(AuthGuard)
   deleteAlbum(@Args() { id }: GetAlbumArgs): Promise<DeletedItem> {
     return this.albumsService.deleteAlbum(id);
+  }
+
+  @Mutation(() => Album)
+  @UseGuards(AuthGuard)
+  updateAlbum(@Args() args: UpdateAlbumArgs): Promise<Album> {
+    return this.albumsService.updateAlbum(args);
   }
 }
