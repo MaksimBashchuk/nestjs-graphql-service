@@ -8,18 +8,14 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpModule } from '@nestjs/axios';
 
 import { setAuthHeaderInterceptor } from './utils/setAuthHeaderInterceptor';
-import { TransformResponseDataInterceptor } from './utils/transformResponseData.interceptor';
 
 import { UsersModule } from './users/users.module';
 import { GenresModule } from './genres/genres.module';
 import { ArtistsModule } from './artists/artists.module';
+import { BandsModule } from './bands/bands.module';
 
 @Module({
   providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: TransformResponseDataInterceptor,
-    },
     {
       provide: APP_INTERCEPTOR,
       useClass: setAuthHeaderInterceptor,
@@ -36,6 +32,7 @@ import { ArtistsModule } from './artists/artists.module';
     UsersModule,
     GenresModule,
     ArtistsModule,
+    BandsModule,
   ],
 })
 export class AppModule {}
