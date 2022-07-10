@@ -63,13 +63,13 @@ type Track {
 }
 
 type Query {
-  user(id: ID!): User!
+  user(id: ID!): User
   jwt(email: String!, password: String!): JWT!
-  genre(id: ID!): Genre!
+  genre(id: ID!): Genre
   genres: [Genre]!
-  artist(id: ID!): Artist!
+  artist(id: ID!): Artist
   artists: [Artist]!
-  band(id: ID!): Band!
+  band(id: ID!): Band
   bands: [Band]!
   track(id: ID!): Track
   tracks: [Track!]!

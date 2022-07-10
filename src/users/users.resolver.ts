@@ -12,7 +12,7 @@ import { AUTH } from './constants';
 export class UsersResolver {
   constructor(private usersService: UsersService) {}
 
-  @Query(() => User)
+  @Query(() => User, { nullable: true })
   user(@Args() { id }: GetUserArgs): Promise<User> {
     return this.usersService.getUser(id);
   }

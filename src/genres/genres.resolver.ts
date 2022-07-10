@@ -15,7 +15,7 @@ import { AuthGuard } from '../users/auth.guard';
 export class GenresResolver {
   constructor(private genresService: GenresService) {}
 
-  @Query(() => Genre)
+  @Query(() => Genre, { nullable: true })
   genre(@Args() { id }: GetGenreArgs): Promise<Genre> {
     return this.genresService.getGenre(id);
   }

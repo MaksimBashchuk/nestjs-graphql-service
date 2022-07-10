@@ -34,7 +34,7 @@ export class ArtistsResolver {
     return await Promise.all(bandsIds.map(id => this.bandsService.getBand(id)));
   }
 
-  @Query(() => Artist)
+  @Query(() => Artist, { nullable: true })
   artist(@Args() { id }: GetArtistArgs): Promise<Artist> {
     return this.artistsService.getArtist(id);
   }

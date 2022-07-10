@@ -36,7 +36,7 @@ export class BandsResolver {
     );
   }
 
-  @Query(() => Band)
+  @Query(() => Band, { nullable: true })
   band(@Args() { id }: GetBandArgs): Promise<Band> {
     return this.bandsService.getBand(id);
   }
