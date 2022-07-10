@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { lastValueFrom, map, Observable } from 'rxjs';
 
 import { Track } from './track.entity';
+import { CreateTrackArgs } from './dto/createTrack.args';
 
 import { BASE_TRACKS_URL } from './constants';
 
@@ -22,6 +23,14 @@ export class TracksService {
     const observable: Observable<Track[]> = this.httpService
       .get<{ items: Track[] }>(BASE_TRACKS_URL)
       .pipe(map(res => res.data.items));
+
+    return await lastValueFrom(observable);
+  };
+
+  createTrack = async (body: CreateTrackArgs): Promise<Track> => {
+    const observable: Observable<Track> = this.httpService
+      .post<Track>(BASE_TRACKS_URL, body)
+      .pipe(map(res => res.data));
 
     return await lastValueFrom(observable);
   };

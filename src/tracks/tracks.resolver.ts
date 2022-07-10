@@ -1,5 +1,12 @@
 import { UseGuards } from '@nestjs/common';
-import { Resolver, Query, ResolveField, Parent, Args } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  ResolveField,
+  Parent,
+  Args,
+  Mutation,
+} from '@nestjs/graphql';
 
 import { DeletedItem } from '../common/deletedItem.entity';
 import { Track } from '../tracks/track.entity';
@@ -14,6 +21,7 @@ import { BandsService } from '../bands/bands.service';
 import { GenresService } from '../genres/genres.service';
 // import { AlbumsService } from '../albums/albums.service';
 import { GetTrackArgs } from './dto/getTrack.args';
+import { CreateTrackArgs } from './dto/createTrack.args';
 
 import { AuthGuard } from '../users/auth.guard';
 
@@ -62,5 +70,11 @@ export class TracksResolver {
   @Query(() => [Track])
   tracks(): Promise<Track[]> {
     return this.tracksService.getAllTracks();
+  }
+
+  @Mutation(() => Track)
+  @UseGuards(AuthGuard)
+  createTrack(@Args() body: CreateTrackArgs) {
+    return this.tracksService.createTrack(body);
   }
 }
