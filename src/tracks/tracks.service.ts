@@ -10,6 +10,14 @@ import { BASE_TRACKS_URL } from './constants';
 export class TracksService {
   constructor(private readonly httpService: HttpService) {}
 
+  getTrack = async (id: string): Promise<Track> => {
+    const observable: Observable<Track> = this.httpService
+      .get<Track>(`${BASE_TRACKS_URL}/${id}`)
+      .pipe(map(res => res.data));
+
+    return await lastValueFrom(observable);
+  };
+
   getAllTracks = async (): Promise<Track[]> => {
     const observable: Observable<Track[]> = this.httpService
       .get<{ items: Track[] }>(BASE_TRACKS_URL)

@@ -71,6 +71,7 @@ type Query {
   artists: [Artist]!
   band(id: ID!): Band!
   bands: [Band]!
+  track(id: ID!): Track
   tracks: [Track!]!
 }
 
