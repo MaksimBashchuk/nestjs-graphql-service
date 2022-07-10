@@ -103,4 +103,5 @@ type Mutation {
   deleteTrack(id: ID!): DeletedItem
   updateTrack(id: ID!, title: String, albumId: String, bandsIds: [String!], artistsIds: [String!], duration: Int, released: Int, genresIds: [String!]): Track!
   createAlbum(name: String!, released: String, artistsIds: [String], bandsIds: [String], trackIds: [String], genresIds: [String]): Album!
+  deleteAlbum(id: ID!): DeletedItem
 }

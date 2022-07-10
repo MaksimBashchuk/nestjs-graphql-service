@@ -86,4 +86,10 @@ export class AlbumsResolver {
   createAlbum(@Args() body: CreateAlbumArgs) {
     return this.albumsService.createAlbum(body);
   }
+
+  @Mutation(() => DeletedItem, { nullable: true })
+  @UseGuards(AuthGuard)
+  deleteAlbum(@Args() { id }: GetAlbumArgs): Promise<DeletedItem> {
+    return this.albumsService.deleteAlbum(id);
+  }
 }

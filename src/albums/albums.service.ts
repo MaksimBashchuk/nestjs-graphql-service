@@ -36,4 +36,12 @@ export class AlbumsService {
 
     return await lastValueFrom(observable);
   };
+
+  deleteAlbum = async (id: string): Promise<DeletedItem> => {
+    const observable: Observable<DeletedItem> = this.httpService
+      .delete<DeletedItem>(`${BASE_ALBUMS_URL}/${id}`)
+      .pipe(map(res => res.data));
+
+    return await lastValueFrom(observable);
+  };
 }
