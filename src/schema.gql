@@ -7,7 +7,7 @@ type User {
   firstName: String
   secondName: String
   middleName: String
-  password: String!
+  password: String
   email: String!
 }
 
@@ -28,6 +28,15 @@ type Genre {
   year: Int
 }
 
+type Band {
+  id: ID!
+  name: String!
+  origin: String
+  members: [String]
+  website: String
+  genres: [Genre]
+}
+
 type Artist {
   id: ID!
   firstName: String
@@ -36,8 +45,8 @@ type Artist {
   birthDate: Date
   birthPlace: String
   country: String
-  bands: [String]!
-  instruments: [String]!
+  bands: [Band]
+  instruments: [String]
 }
 
 """Date custom scalar type"""
@@ -50,6 +59,8 @@ type Query {
   genres: [Genre]!
   artist(id: ID!): Artist!
   artists: [Artist]!
+  band(id: ID!): Band!
+  bands: [Band]!
 }
 
 type Mutation {
@@ -60,4 +71,7 @@ type Mutation {
   createArtist(firstName: String!, secondName: String!, middleName: String, birthDate: Date, birthPlace: String, country: String!, bands: [String], instruments: [String]): Artist!
   deleteArtist(id: ID!): DeletedItem
   updateArtist(id: ID!, firstName: String, secondName: String, middleName: String, birthDate: Date, birthPlace: String, country: String, bands: [String], instruments: [String]): Artist!
+  createBand(name: String!, origin: String, members: [String], website: String, genresIds: [ID]): Band!
+  deleteBand(id: ID!): DeletedItem
+  updateBand(id: ID!, name: String, origin: String, members: [String], website: String, genresIds: [ID]): Band!
 }
