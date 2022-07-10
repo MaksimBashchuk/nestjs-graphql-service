@@ -25,9 +25,9 @@ export class TracksService {
     }
   };
 
-  getAllTracks = async (): Promise<Track[]> => {
+  getAllTracks = async (limit: number, offset: number): Promise<Track[]> => {
     const observable: Observable<Track[]> = this.httpService
-      .get<{ items: Track[] }>(BASE_TRACKS_URL)
+      .get<{ items: Track[] }>(BASE_TRACKS_URL, { params: { limit, offset } })
       .pipe(map(res => res.data.items));
 
     return await lastValueFrom(observable);

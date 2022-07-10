@@ -25,9 +25,9 @@ export class ArtistsService {
     }
   };
 
-  getAllArtists = async (): Promise<Artist[]> => {
+  getAllArtists = async (limit: number, offset: number): Promise<Artist[]> => {
     const observable: Observable<Artist[]> = this.httpService
-      .get<{ items: Artist[] }>(BASE_ARTISTS_URL)
+      .get<{ items: Artist[] }>(BASE_ARTISTS_URL, { params: { limit, offset } })
       .pipe(map(res => res.data.items));
 
     return await lastValueFrom(observable);

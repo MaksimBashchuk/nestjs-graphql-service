@@ -17,6 +17,7 @@ import { BandsService } from '../bands/bands.service';
 import { CreateArtistArgs } from './dto/createArtist.args';
 import { GetArtistArgs } from './dto/getArtist.args';
 import { UpdateArtistArgs } from './dto/updateArtists.args';
+import { PaginationArgs } from '../common/pagination.args';
 
 import { AuthGuard } from '../users/auth.guard';
 
@@ -40,8 +41,8 @@ export class ArtistsResolver {
   }
 
   @Query(() => [Artist], { nullable: 'items' })
-  artists(): Promise<Artist[]> {
-    return this.artistsService.getAllArtists();
+  artists(@Args() { limit, offset }: PaginationArgs): Promise<Artist[]> {
+    return this.artistsService.getAllArtists(limit, offset);
   }
 
   @Mutation(() => Artist)

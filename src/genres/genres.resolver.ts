@@ -8,6 +8,7 @@ import { GenresService } from './genres.service';
 import { CreateGenreArgs } from './dto/createGenre.args';
 import { GetGenreArgs } from './dto/getGenre.args';
 import { UpdateGenreArgs } from './dto/updateGenre.args';
+import { PaginationArgs } from '../common/pagination.args';
 
 import { AuthGuard } from '../users/auth.guard';
 
@@ -21,8 +22,8 @@ export class GenresResolver {
   }
 
   @Query(() => [Genre], { nullable: 'items' })
-  genres(): Promise<Genre[]> {
-    return this.genresService.getAllGenres();
+  genres(@Args() { limit, offset }: PaginationArgs): Promise<Genre[]> {
+    return this.genresService.getAllGenres(limit, offset);
   }
 
   @Mutation(() => Genre)

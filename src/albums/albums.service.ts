@@ -25,9 +25,9 @@ export class AlbumsService {
     }
   };
 
-  getAllAlbums = async (): Promise<Album[]> => {
+  getAllAlbums = async (limit: number, offset: number): Promise<Album[]> => {
     const observable: Observable<Album[]> = this.httpService
-      .get<{ items: Album[] }>(BASE_ALBUMS_URL)
+      .get<{ items: Album[] }>(BASE_ALBUMS_URL, { params: { limit, offset } })
       .pipe(map(res => res.data.items));
 
     return await lastValueFrom(observable);

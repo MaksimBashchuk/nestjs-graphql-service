@@ -17,6 +17,7 @@ import { GenresService } from '../genres/genres.service';
 import { CreateBandArgs } from './dto/createBand.args';
 import { GetBandArgs } from './dto/getBand.args';
 import { UpdateBandArgs } from './dto/updateBand.args';
+import { PaginationArgs } from '../common/pagination.args';
 
 import { AuthGuard } from '../users/auth.guard';
 
@@ -42,8 +43,8 @@ export class BandsResolver {
   }
 
   @Query(() => [Band], { nullable: 'items' })
-  bands(): Promise<Band[]> {
-    return this.bandsService.getAllBands();
+  bands(@Args() { limit, offset }: PaginationArgs): Promise<Band[]> {
+    return this.bandsService.getAllBands(limit, offset);
   }
 
   @Mutation(() => Band)

@@ -84,15 +84,15 @@ type Query {
   user(id: ID!): User
   jwt(email: String!, password: String!): JWT!
   genre(id: ID!): Genre
-  genres: [Genre]!
+  genres(limit: Int = 5, offset: Int = 0): [Genre]!
   artist(id: ID!): Artist
-  artists: [Artist]!
+  artists(limit: Int = 5, offset: Int = 0): [Artist]!
   band(id: ID!): Band
-  bands: [Band]!
+  bands(limit: Int = 5, offset: Int = 0): [Band]!
   track(id: ID!): Track
-  tracks: [Track!]!
+  tracks(limit: Int = 5, offset: Int = 0): [Track!]!
   album(id: ID!): Album
-  albums: [Album]!
+  albums(limit: Int = 5, offset: Int = 0): [Album]!
   favourites: Favourites
 }
 

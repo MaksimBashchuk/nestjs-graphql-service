@@ -25,9 +25,9 @@ export class GenresService {
     }
   };
 
-  getAllGenres = async (): Promise<Genre[]> => {
+  getAllGenres = async (limit: number, offset: number): Promise<Genre[]> => {
     const observable: Observable<Genre[]> = this.httpService
-      .get<{ items: Genre[] }>(BASE_GENRE_URL)
+      .get<{ items: Genre[] }>(BASE_GENRE_URL, { params: { limit, offset } })
       .pipe(map(res => res.data.items));
 
     return await lastValueFrom(observable);

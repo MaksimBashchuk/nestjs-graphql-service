@@ -25,9 +25,9 @@ export class BandsService {
     }
   };
 
-  getAllBands = async (): Promise<Band[]> => {
+  getAllBands = async (limit: number, offset: number): Promise<Band[]> => {
     const observable: Observable<Band[]> = this.httpService
-      .get<{ items: Band[] }>(BASE_BANDS_URL)
+      .get<{ items: Band[] }>(BASE_BANDS_URL, { params: { limit, offset } })
       .pipe(map(res => res.data.items));
 
     return await lastValueFrom(observable);

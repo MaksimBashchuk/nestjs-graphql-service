@@ -23,6 +23,7 @@ import { AlbumsService } from '../albums/albums.service';
 import { GetTrackArgs } from './dto/getTrack.args';
 import { CreateTrackArgs } from './dto/createTrack.args';
 import { UpdateTrackArgs } from './dto/updateTrack.args';
+import { PaginationArgs } from '../common/pagination.args';
 
 import { AuthGuard } from '../users/auth.guard';
 
@@ -35,9 +36,6 @@ export class TracksResolver {
     private genresService: GenresService,
     private albumsService: AlbumsService,
   ) {}
-
-  // @ResolveField()
-  // async album
 
   @ResolveField(() => Album, { nullable: true })
   async album(@Parent() track: Track): Promise<Album> {
@@ -77,8 +75,8 @@ export class TracksResolver {
   }
 
   @Query(() => [Track])
-  tracks(): Promise<Track[]> {
-    return this.tracksService.getAllTracks();
+  tracks(@Args() { limit, offset }: PaginationArgs): Promise<Track[]> {
+    return this.tracksService.getAllTracks(limit, offset);
   }
 
   @Mutation(() => Track)

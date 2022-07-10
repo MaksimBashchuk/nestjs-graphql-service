@@ -24,6 +24,7 @@ import { GenresService } from '../genres/genres.service';
 import { GetAlbumArgs } from './dto/getAlbum.args';
 import { CreateAlbumArgs } from './dto/createAlbum.args';
 import { UpdateAlbumArgs } from './dto/updateAlbum.args';
+import { PaginationArgs } from '../common/pagination.args';
 
 import { AuthGuard } from '../users/auth.guard';
 
@@ -77,8 +78,8 @@ export class AlbumsResolver {
   }
 
   @Query(() => [Album], { nullable: 'items' })
-  albums(): Promise<Album[]> {
-    return this.albumsService.getAllAlbums();
+  albums(@Args() { limit, offset }: PaginationArgs): Promise<Album[]> {
+    return this.albumsService.getAllAlbums(limit, offset);
   }
 
   @Mutation(() => Album)
