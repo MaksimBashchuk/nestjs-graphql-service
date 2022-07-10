@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Resolver } from '@nestjs/graphql';
+import { Resolver, Query, ResolveField, Parent } from '@nestjs/graphql';
 
 import { DeletedItem } from '../common/deletedItem.entity';
 import { Track } from '../tracks/track.entity';
@@ -24,4 +24,37 @@ export class TracksResolver {
     private artistsService: ArtistsService,
     private genresService: GenresService, // private albumsService: AlbumsService
   ) {}
+
+  // @ResolveField()
+  // async album
+
+  @ResolveField(() => [Artist], { nullable: 'itemsAndList' })
+  async artists(@Parent() track: Track): Promise<Artist[]> {
+    const { artistsIds } = track;
+
+    return await Promise.all(
+      artistsIds.map(id => this.artistsService.getArtist(id)),
+    );
+  }
+
+  @ResolveField(() => [Band], { nullable: 'itemsAndList' })
+  async bands(@Parent() track: Track): Promise<Band[]> {
+    const { bandsIds } = track;
+
+    return await Promise.all(bandsIds.map(id => this.bandsService.getBand(id)));
+  }
+
+  @ResolveField(() => [Genre], { nullable: 'itemsAndList' })
+  async genres(@Parent() track: Track): Promise<Genre[]> {
+    const { genresIds } = track;
+
+    return await Promise.all(
+      genresIds.map(id => this.genresService.getGenre(id)),
+    );
+  }
+
+  @Query(() => [Track])
+  tracks(): Promise<Track[]> {
+    return this.tracksService.getAllTracks();
+  }
 }

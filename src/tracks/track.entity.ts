@@ -9,7 +9,7 @@ export class Track {
   title: string;
 
   // @Field(() => [ID], { nullable: 'itemsAndList', name: 'album' })
-  // albumId: string;
+  // albumId?: string;
 
   @Field(() => [ID], { nullable: 'itemsAndList', name: 'artists' })
   artistsIds: string[];
@@ -17,11 +17,11 @@ export class Track {
   @Field(() => [ID], { nullable: 'itemsAndList', name: 'bands' })
   bandsIds: string[];
 
-  @Field(() => Int)
-  duration: number;
+  @Field(() => Int, { nullable: true })
+  duration?: number;
 
-  @Field(() => Int)
-  released: number;
+  @Field(() => Int, { nullable: true })
+  released?: number;
 
   @Field(() => [ID], { nullable: 'itemsAndList', name: 'genres' })
   genresIds: string[];

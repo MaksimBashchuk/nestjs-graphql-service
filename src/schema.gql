@@ -52,6 +52,16 @@ type Artist {
 """Date custom scalar type"""
 scalar Date
 
+type Track {
+  id: ID!
+  title: String!
+  artists: [Artist]
+  bands: [Band]
+  duration: Int
+  released: Int
+  genres: [Genre]
+}
+
 type Query {
   user(id: ID!): User!
   jwt(email: String!, password: String!): JWT!
@@ -61,6 +71,7 @@ type Query {
   artists: [Artist]!
   band(id: ID!): Band!
   bands: [Band]!
+  tracks: [Track!]!
 }
 
 type Mutation {
