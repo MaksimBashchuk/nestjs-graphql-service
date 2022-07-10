@@ -10,5 +10,8 @@
 6. Start microservices and database instance.
 
 ## USAGE
+
 - To start application use `npm run start:dev` script.
 - Open browser and go to the GraphQL playground address (`http://localhost:3000/graphql` by default)
+
+> **NOTE!** For queries that support pagination you can use `limit` and 'offset' arguments.
