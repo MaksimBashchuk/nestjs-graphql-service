@@ -2,6 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { lastValueFrom, map, Observable } from 'rxjs';
 
+import { DeletedItem } from 'src/common/deletedItem.entity';
 import { Track } from './track.entity';
 import { CreateTrackArgs } from './dto/createTrack.args';
 
@@ -30,6 +31,14 @@ export class TracksService {
   createTrack = async (body: CreateTrackArgs): Promise<Track> => {
     const observable: Observable<Track> = this.httpService
       .post<Track>(BASE_TRACKS_URL, body)
+      .pipe(map(res => res.data));
+
+    return await lastValueFrom(observable);
+  };
+
+  deleteTrack = async (id: string): Promise<DeletedItem> => {
+    const observable: Observable<DeletedItem> = this.httpService
+      .delete<DeletedItem>(`${BASE_TRACKS_URL}/${id}`)
       .pipe(map(res => res.data));
 
     return await lastValueFrom(observable);
